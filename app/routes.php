@@ -26,6 +26,9 @@ Route::get('/user/{id}','UserController@getShow');
 
 Route::group(array('before' => 'app.auth'), function() {
 	Route::post('/comment/postStore','CommentController@postStore');
+	Route::post('/video/request/','VideoController@requestReborn');
+	Route::get('/video/reborn/{id}','VideoController@reborn');
+
 });
 
 Route::filter('app.auth',function(){

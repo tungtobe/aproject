@@ -1,19 +1,25 @@
 <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>This video exist during  <span id="runner"></span> !</h1>
+        <h2><b>{{$video->title}}<b> </h2>
+        <h4>exist during  <span id="runner"></span> !</h4>
         
+        <!-- share div  -->
+        <div data-type="button_count" class="fb-share-button" data-href="<?php echo URL::current(); ?>" data-width="600"></div>
+        <a href="<?php echo URL::current(); ?>" class="twitter-share-button" data-text="Flush Video">Tweet</a>
+
+
+        <!-- video div -->
         <h3><h3>
         <video id="myVideo" controls poster="video.jpg" width="600" height="400" >
-           <source src="sample.mp4" type="video/mp4" />
-           
+           <source src="sample.mp4" type="video/mp4" />           
         </video>
 
-        
+
 
         <!-- add new comment -->
         <div>
           <input name="video_id" id="video_id" type="hidden" value="{{ $video->id}}">
-          <textarea row ="10" col = "20" name="content" id="content" placeholder="コメート" ></textarea><br/>
+          <textarea row ="10" col = "20" name="content" id="content" placeholder="コメート" ></textarea>
           <button class="btn btn-primary" type="button" id="submitButton" name="Submit">Submit</button>
         </div>
 
@@ -36,19 +42,9 @@
           
         
       </div>
-   
-        <button class="btn btn-primary" type="button" id="fbShare" name="Submit">Share via FB</button>
           
       
 
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"></div>
       
 @section('javascript')
 <script type="text/javascript">
@@ -70,8 +66,7 @@ $(function() {
         success: function (data) {
           if(data.msg=="SUCCESS"){
             $("#new-comment").prepend("<p>"+data.content+"</p>");
-            
-            console.log(data);        
+            $("#content").val(" ");        
           }
           else {          
             $("#new-comment").html('');

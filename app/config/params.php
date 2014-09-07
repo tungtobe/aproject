@@ -10,7 +10,7 @@ return array('twitter'=>array(
 			'redirectUrl' => 'http://local.host/loginfb'
 			),
 		'globalVar'=>  array(
-			'MAX_EXIST_TIME' => 180000,
+			'MAX_EXIST_TIME' => 1800,
 
 			)
 

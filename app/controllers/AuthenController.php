@@ -71,13 +71,13 @@ class AuthenController extends BaseController {
         $user  = $connection->get('account/verify_credentials');
 
         $newuser = User::where(array(
-                                    'email' => $user ->id,
+                                    'unique_id' => md5($user ->id),
                                     'type' => "tw",
                             ))->first();
             if(is_null($newuser)){
                 $newuser = new User;
                 $newuser->username = $user ->screen_name;
-                $newuser->email = $user ->id;
+                $newuser->unique_id = md5($user ->id);
                 $newuser->type = "tw";
                 $newuser->save();
                 Auth::login($newuser);
@@ -182,15 +182,14 @@ class AuthenController extends BaseController {
     			session_destroy();
     		}
     		
-
-    		$newuser = User::where(array(
-                                    'email' => $user->email,
-                                    'type' => "fb",
-                            ))->first();
+            $newuser = User::where(array(
+                        'unique_id' => md5($user->id),
+                        'type' => "fb",
+                ))->first();
     		if(is_null($newuser)){
     			$newuser = new User;
     			$newuser->username = $user->first_name . " " . $user->last_name;
-    			$newuser->email = $user->email;
+    			$newuser->unique_id = md5($user->id);
     			$newuser->type = "fb";
                 $newuser->access_token = $params['access_token'];
                 $newuser->save();

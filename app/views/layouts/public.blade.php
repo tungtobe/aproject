@@ -53,7 +53,7 @@
             </ul>
             @if (Auth::check())
                 <form id="socialLogin" class="navbar-form pull-right">
-                  <p>Hello <b>{{Auth::user()->username}}</b>    {{ HTML::linkAction('AuthenController@getLogout','Logout') }}  </p>
+                  <p>Hello <b>{{HTML::linkAction('UserController@getShow',Auth::user()->username,array(Auth::user()->unique_id)) }}</b>    {{ HTML::linkAction('AuthenController@getLogout','Logout') }}  </p>
                 </form>            
             @else
                 <form id="socialLogin" class="navbar-form pull-right">
@@ -103,7 +103,7 @@
         js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);
       }}(document, 'script', 'twitter-wjs');
     </script>
-    
+
     @section('javascript') 
     @show
     <style>
