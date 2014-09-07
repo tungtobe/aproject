@@ -1,7 +1,7 @@
 <?php
 
 class BaseController extends Controller {
-
+	protected $layout = 'layouts.public';
 	/**
 	 * Setup the layout used by the controller.
 	 *
