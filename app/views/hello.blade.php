@@ -10,17 +10,29 @@
 
       <div class="hero-unit">
         <h1>Enjoy!! 5 sec video! during only 30 min!</h1>
-        <form id="form-upload" action="<?php echo URL::action('VideoController@upload'); ?>" method="post" enctype="multipart/form-data"> 
-           Title <input type="text" id="video_title" name="video_title"> <br>
-           <input type="file" id="upload_video" name="uploadedfile"><br>  
-           <input type="submit" id="upload_submit" disabled value="Upload File">  
-        </form>  
-        <div id="progress">  
-           <div id="bar"></div >  
-           <div id="percent">0%</div >  
-        </div>  
-         <div id="status"></div> 
+
+        @if(Auth::check())
+        <!-- upload form -->
+        <div class="row">
+          <form id="form-upload" action="<?php echo URL::action('VideoController@upload'); ?>" method="post" enctype="multipart/form-data"> 
+            Title <input type="text" id="video_title" name="video_title"> <br>
+            <input type="file" id="upload_video" name="uploadedfile"><br>  
+            <input type="submit" id="upload_submit" disabled value="Upload File">  
+          </form>  
+          <div id="progress">  
+             <div id="bar"></div >  
+             <div id="percent">0%</div >  
+          </div>  
+          <div id="status"></div> 
+         
+        </div>
+        
+      @else
+      <div class="row">
+        <h2>Login for upload video</h2>
+        <p>Sign in with {{ HTML::linkAction('AuthenController@loginWithFacebook','Facebook') }}OR {{ HTML::linkAction('AuthenController@getLoginwithTwitter','Twitter') }}</p>
       </div>
+      @endif
 
       
 
@@ -44,10 +56,7 @@
           <p>for example speak ill of the boss,  tacky joke, or own up to...</p>
         </div>
       </div>
-      <hr>
-      <footer>
-        <p>&copy; Company 2013</p>
-      </footer>
+      
 
 <?php echo exec("cd videoupload ; /usr/local/bin/ffmpeg -i sample.mpg -vcodec h264 -acodec aac -strict -2 testconvert.mp4"); ?>
 
@@ -61,13 +70,14 @@
  var status = $('#status');  
 
     $('#upload_video').change(function(){
-      var maxsize = 25000000; // 20MB
+      var maxsize = 50000000; // 50MB
       var filetype = ["png", "mpg", "webm"];
 
        // get the file name, possibly with path (depends on browser)
        var file = this.files[0],
        filename = file.name,
        filesize = file.size;
+       // console.log(file);
 
         // Use a regular expression to trim everything before final dot
         var extension = filename.replace(/^.*\./, '');
@@ -90,13 +100,21 @@
         else
         {
           $("#upload_submit").attr('disabled','disabled');
-          alert("Invalid video file, your video must be under 20mb and ... ");
+          alert("Invalid video file, your video must be under 50mb and ... ");
         }
-        
-
     });
 
-   $('form').ajaxForm({  
+    
+    $("#upload_submit").click(function(){
+      if ($("#video_title").val() == "") {
+        event.preventDefault();
+        $("#video_title").css('border-color','red');
+      }else{
+        $(this).submit();
+      }
+    });
+
+   $('#form-upload').ajaxForm({  
      beforeSend: function() {  
        status.empty();  
        var percentVal = '0%';  
@@ -116,9 +134,7 @@
         window.location.replace(mes.link);
        }else{
         $('#status').html(mes.error_mess);
-       }
-       
-       
+       }       
      }  
    });   
  })();      

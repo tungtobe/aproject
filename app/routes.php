@@ -20,15 +20,16 @@ Route::get('/callback', 'AuthenController@TwitterCallback');
 Route::get('/logged', 'AuthenController@showUserCredentials');
 
 Route::get('/video/{id}','VideoController@showVideo');
-Route::post('/video/upload','VideoController@upload');
 
-Route::get('/user/{id}','UserController@getShow');
 
 Route::group(array('before' => 'app.auth'), function() {
 	Route::post('/comment/postStore','CommentController@postStore');
 	Route::post('/video/request/','VideoController@requestReborn');
 	Route::get('/video/reborn/{id}','VideoController@reborn');
-
+	Route::get('/video/deactive/{id}','VideoController@deactive');
+	Route::get('/video/delete/{id}','VideoController@delete');
+	Route::get('/user/{id}','UserController@getShow');	
+	Route::post('/video/upload','VideoController@upload');
 });
 
 Route::filter('app.auth',function(){

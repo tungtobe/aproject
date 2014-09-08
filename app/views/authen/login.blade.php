@@ -1,1 +1,1 @@
-<p>Sign in with {{ HTML::linkAction('AuthenController@loginWithFacebook','Facebook') }}OR {{ HTML::linkAction('AuthenController@loginWithTwitter','Twitter') }}</p>
+<p>Sign in with {{ HTML::linkAction('AuthenController@loginWithFacebook','Facebook') }}OR {{ HTML::linkAction('AuthenController@getLoginwithTwitter','Twitter') }}</p>

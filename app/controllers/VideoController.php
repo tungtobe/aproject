@@ -146,4 +146,38 @@ class VideoController extends BaseController {
 
 	}
 
+	public function deactive($video_id){
+		$video = Video::find($video_id);
+		if (is_null($video)) {
+			return Redirect::action('UserController@getShow',array(Auth::user()->unique_id));
+		}
+
+		// check video owner
+		if ($video->created_by != Auth::user()->id) {
+			return Redirect::action('UserController@getShow',array(Auth::user()->unique_id));
+		}
+
+		// edit video status
+		$video->status = "deactive";
+		$video->save();
+		return Redirect::action('UserController@getShow',array(Auth::user()->unique_id));
+
+	}
+
+	public function delete($video_id){
+		$video = Video::find($video_id);
+		if (is_null($video)) {
+			return Redirect::action('UserController@getShow',array(Auth::user()->unique_id));
+		}
+
+		// check video owner
+		if ($video->created_by != Auth::user()->id) {
+			return Redirect::action('UserController@getShow',array(Auth::user()->unique_id));
+		}
+
+		unlink($video->link);
+		$video->delete();
+		return Redirect::action('UserController@getShow',array(Auth::user()->unique_id));
+	}
+
 }

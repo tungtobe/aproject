@@ -87,7 +87,7 @@ $(function() {
     autostart: true,
     countdown: true,
     milliseconds: false,
-    startAt: {{ $count_down * 1000 }}, // alternatively you could just write: 60*1000
+    startAt: {{ $count_down * 1000 }}, // count_down in milisecond
     stopAt:0
   }).on('runnerFinish', function(eventObject, info) {
     alert('Video has expired !!! ');
