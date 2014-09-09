@@ -11,7 +11,7 @@
         <!-- video div -->
         <h3><h3>
         <video id="myVideo" controls poster="video.jpg" width="600" height="400" >
-           <source src="sample.mp4" type="video/mp4" />           
+           <source src="{{$video->link}}" type="video/mp4" />           
         </video>
 
 
