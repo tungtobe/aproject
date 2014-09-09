@@ -22,6 +22,7 @@ Route::get('/logged', 'AuthenController@showUserCredentials');
 Route::get('/video/{id}','VideoController@showVideo');
 
 
+
 Route::group(array('before' => 'app.auth'), function() {
 	Route::post('/comment/postStore','CommentController@postStore');
 	Route::post('/video/request/','VideoController@requestReborn');

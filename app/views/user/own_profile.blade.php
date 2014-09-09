@@ -1,8 +1,5 @@
-<?php if (isset($mess)) {
-	echo $mess;
-} ?>
 <div class="hero-unit">
-	<h3>{{$user->username}}</h3>
+	<center><h3 class="_title">{{$user->username}}</h3></center>
 
 	<p> ACTIVE VIDEO</p>
 	<div id='active-video'>
@@ -11,11 +8,12 @@
 		@else
 		<table class="table table-bordered">
 		  	<tr>
-		  		<th>ID</th>
+		  		<th style="width:15%;">ID</th>
 		  		<th>Title</th>	
-		  		<th>Deactive</th>
-		  		<th>Delete</th>	  
+		  		<th style="width:15%;">Deactive</th>
+		  		<th style="width:15%;">Delete</th>	  
 			</tr>
+			
 			@for($i = 0; $i < count($active_videos) ; $i++)
 			<tr>
 		  		<td>{{$active_videos[$i]->id}}</td>
@@ -28,19 +26,19 @@
 		@endif
 		
 	</div>
-
+	<br><hr><br>
 	<p> DEACTIVE VIDEO</p>
 	<div id='deactive-video'>
 		@if(count($deactive_videos) == 0)
-					No active video
+					No deactive video
 		@else
 		<table class="table table-bordered">
 		  	<tr>
-		  		<th>ID</th>
+		  		<th style="width:15%;">ID</th>
 		  		<th>Title</th>
-		  		<th>Reborn Request</th>
-		  		<th>Reborn</th>	
-		  		<th>Delete</th>		  
+		  		<th style="width:25%;">Reborn Request</th>
+		  		<th style="width:15%;">Reborn</th>	
+		  		<th style="width:15%;">Delete</th>		  
 			</tr>
 			@for($i = 0; $i < count($deactive_videos) ; $i++)
 			<tr>

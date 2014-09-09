@@ -64,7 +64,7 @@ class UserController extends BaseController {
 			return $this->layout->content = View::make('notfound');
 		}
 
-		
+		// check if user go to own page 
 		if (Auth::user()->unique_id == $unique_id) {
 			// get active video 
 			$active_videos = $this->getActiveVideo($user->id);
@@ -76,7 +76,11 @@ class UserController extends BaseController {
 																		));
 
 		}else{
-			$this->layout->content = View::make('user.profile')->with('user',$user);
+			$active_videos = $this->getActiveVideo($user->id);
+			$this->layout->content = View::make('user.profile')->with(array(
+																		'user'=> $user,
+																		'active_videos'=> $active_videos
+																	));
 		}
 		
 	}

@@ -1,22 +1,30 @@
 <!-- Main hero unit for a primary marketing message or call to action -->
 <style>
-    #form-upload { padding: 10px; background: #A5CCFF; border-radius: 5px;}
     #progress { border: 1px solid #ccc; height: 20px; margin-top: 10px;text-align: center;position: relative;}
     #bar { background: #F39A3A; height: 20px; width: 0px;}
     #percent { position: absolute; left: 50%; top: 0px;}
 </style>
 
 <div class="hero-unit">
-    <h1>Enjoy!! 5 sec video! during only 30 min!</h1>
+
+    <center><h1>Enjoy!! 5 sec video! during only 30 min!</h1></center>
 
     @if(Auth::check())
     <!-- upload form -->
     <div class="row">
-        <form id="form-upload" action="<?php echo URL::action('VideoController@upload'); ?>" method="post" enctype="multipart/form-data"> 
-            Title <input type="text" id="video_title" name="video_title"> <br>
-            <input type="file" id="upload_video" name="uploadedfile"><br>  
-            <input type="submit" id="upload_submit" disabled value="Upload File">  
-        </form>  
+
+        <form id="form-upload" action="<?php echo URL::action('VideoController@upload'); ?>" method="post" enctype="multipart/form-data">
+          <center>
+            <div class="row">
+              <input type="text" id="video_title" name="video_title" class="_form-text" placeholder=" Video title">
+            </div>
+            <div class="row">
+              <input type="file" id="upload_video" name="uploadedfile" class="custom-file-input">
+            </div>
+            <div class="row">
+              <input type="submit" class="_btn" id="upload_submit" disabled='disabled' value="Upload File" />
+          </center>
+        </form>
         <div id="progress">  
             <div id="bar"></div >  
             <div id="percent">0%</div >  
@@ -27,8 +35,14 @@
 
     @else
     <div class="row">
-        <h2>Login for upload video</h2>
-        <p>Sign in with {{ HTML::linkAction('AuthenController@loginWithFacebook','Facebook') }}OR {{ HTML::linkAction('AuthenController@getLoginwithTwitter','Twitter') }}</p>
+      <center>
+        <div class="row"><h2>Login for upload video</h2></div>
+        <br/>
+        <div class="row">
+          {{ HTML::linkAction('AuthenController@loginWithFacebook','Facebook', null, array('class' => '_btn')) }}
+           or {{ HTML::linkAction('AuthenController@getLoginwithTwitter','Twitter', null, array('class' => '_btn')) }}
+        </div>
+      </center>
     </div>
     @endif
 
@@ -69,18 +83,17 @@
 
    $('#upload_video').change(function() {
        var maxsize = 50000000; // 50MB
-       var filetype = ["mp4", "mpg", "webm"];
+       var filetype = ["mp4"];
 
        // get the file name, possibly with path (depends on browser)
        var file = this.files[0],
                filename = file.name,
                filesize = file.size;
-       // console.log(file);
 
        // Use a regular expression to trim everything before final dot
        var extension = filename.replace(/^.*\./, '');
 
-       // Iff there is no dot anywhere in filename, we would have extension == filename,
+       // If there is no dot anywhere in filename, we would have extension == filename,
        // so we account for this possibility now
        if (extension == filename) {
            extension = '';
@@ -98,7 +111,7 @@
        else
        {
            $("#upload_submit").attr('disabled', 'disabled');
-           alert("Invalid video file, your video must be under 50mb and ... ");
+           alert("Invalid video file, your video must be under 50mb and type of mp4 ");
        }
    });
 

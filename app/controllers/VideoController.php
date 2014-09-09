@@ -64,8 +64,8 @@ class VideoController extends BaseController {
     public function upload() {
         $upload_dir = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']);
         $upload_url = 'videoupload/';
-        // $temp_name = $_FILES['uploadedfile']['tmp_name'];  
-        // $file_name = $_FILES['uploadedfile']['name']; 
+        $temp_name = $_FILES['uploadedfile']['tmp_name'];  
+        $file_name = $_FILES['uploadedfile']['name']; 
         $file_name1 = md5(uniqid(rand(), TRUE)) . ".mp4"; //random file name 
         $file_path = $upload_dir . $upload_url . $file_name1;
         if (move_uploaded_file($temp_name, $file_path)) {
@@ -75,7 +75,7 @@ class VideoController extends BaseController {
             $newvideo->title = $_POST['video_title'];
             $newvideo->status = "active";
             $newvideo->created_by = Auth::user()->id;
-            $newvideo->link = $file_path;
+            $newvideo->link = "/../".$upload_url.$file_name1;
             $newvideo->save();
             return Response::json(array(
                         'status' => "SUCCESS",
@@ -89,6 +89,7 @@ class VideoController extends BaseController {
         }
     }
 
+    
     public function requestReborn() {
         $video_id = $_POST['video_id'];
         $user_id = $_POST['user_id'];

@@ -10,6 +10,7 @@
     <!-- Le styles -->
     {{ HTML::style('css/bootstrap.min.css'); }}
     {{ HTML::style('css/bootstrap-responsive.css'); }}
+    {{ HTML::style('css/css.css'); }}
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -57,7 +58,7 @@
                 </form>            
             @else
                 <form id="socialLogin" class="navbar-form pull-right">
-                  <p>Sign in with {{ HTML::linkAction('AuthenController@loginWithFacebook','Facebook') }}OR {{ HTML::linkAction('AuthenController@getLoginwithTwitter','Twitter') }}</p>
+                  <p>Sign in with {{ HTML::linkAction('AuthenController@loginWithFacebook','Facebook') }} or {{ HTML::linkAction('AuthenController@getLoginwithTwitter','Twitter') }}</p>
                 </form>
             @endif
             
@@ -66,18 +67,11 @@
       </div>
     </div>
 
+    <!-- /container -->
     <div class="container">
-      {{$content}}
-      
-    </div> <!-- /container -->
+      {{$content}}      
+    </div> 
     
-     <hr>
-    <footer>
-        <p>&copy; Company 2013</p>
-      </footer>
-
-    <!-- Le javascript
-    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     {{ HTML::script('js/bootstrap.js'); }} 
     {{ HTML::script('js/jquery-1.11.1.min.js'); }} 
@@ -106,15 +100,7 @@
 
     @section('javascript') 
     @show
-    <style>
-        video {
-            margin:50px 0;
-            width:100%;
-        }
-        #socialLogin p{ color:#FFF }
-        #socialLogin a.Twitter:after {content: url("../assets/img/social/Twitter.png")}
-        #socialLogin a.Facebook:after{content: url("../assets/img/social/Facebook.png")}
-    </style>
+    
   </body>
 </html>
 
