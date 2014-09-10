@@ -1,25 +1,58 @@
-## Laravel PHP Framework
+#I. Setup Project
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+###Step1: Setup database
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+Create database name `pgtest10`
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+```
+mysql> create database pgtest10;
+```
+create database username `pgtest10` and password `b9@o9yqUX`
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Import sql file in `schema/pgtest10.sql`
 
-## Official Documentation
+```
+$ mysql -upgtest10 -pb9@o9yqUX pgtest10 < pgtest10.sql
+```
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+if you want to use your own database, edit config in `app/config/database`
+###Step2: setup a virtual host
+setup a virtual host name `local.host`
 
-### Contributing To Laravel
+Ubuntu: [link](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts)
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+MacOS: [link](http://coolestguidesontheplanet.com/set-virtual-hosts-apache-mac-osx-10-9-mavericks-osx-10-8-mountain-lion/)
 
-### License
+###Step3: Download source code to your server document root folder
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Clone source code 
+
+```
+$ git clone https://github.com/tungtobe/aproject.git
+```
+
+##Some Project Images
+####Home page
+
+![home1](http://i275.photobucket.com/albums/jj288/tung_tobe/Flush%20Video/index.png)
+![home1](http://i275.photobucket.com/albums/jj288/tung_tobe/Flush%20Video/index_login.png)
+
+##### Invalid video type
+
+![valid](http://i275.photobucket.com/albums/jj288/tung_tobe/Flush%20Video/file_type.png)
+
+#### Video page
+![video](http://i275.photobucket.com/albums/jj288/tung_tobe/Flush%20Video/video_detail.png)
+
+#### Share function
+
+![share](http://i275.photobucket.com/albums/jj288/tung_tobe/Flush%20Video/share.png)
+
+#### Comment function
+
+![comment](http://i275.photobucket.com/albums/jj288/tung_tobe/Flush%20Video/comment.png)
+
+#### Video setting
+![setting](http://i275.photobucket.com/albums/jj288/tung_tobe/Flush%20Video/video_edit.png)
+
+
