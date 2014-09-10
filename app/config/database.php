@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'aproject',
+			'database'  => 'pgtest10',
 			'username'  => 'pgtest10',
 			'password'  => 'b9@o9yqUX',
 			'charset'   => 'utf8',

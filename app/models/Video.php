@@ -1,28 +1,27 @@
 <?php
 
+class Video extends Eloquent {
 
-class Video extends Eloquent  {
-	protected $table = 'videos';
+    protected $table = 'videos';
 
-	public static function validate($input) {
-		$rules = array(
-				'title' => 'required'
-		);
+    public static function validate($input) {
+        $rules = array(
+            'title' => 'required'
+        );
 
-		return Validator::make($input, $rules);
-	}
+        return Validator::make($input, $rules);
+    }
 
     //Define relationship between Video-Comments
-	public function comment(){
-        return $this->hasMany('Comment','video_id');
+    public function comment() {
+        return $this->hasMany('Comment', 'video_id');
     }
 
     //Define relationship between Video-User
-	public function user(){
-		return $this->belongsTo('User', 'created_by');
-	}
+    public function user() {
+        return $this->belongsTo('User', 'created_by');
+    }
 
-	
 }
 
 ?>

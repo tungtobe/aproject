@@ -75,3 +75,9 @@ input[disabled]{
 	font-size: 15px;
 	color: #606060;
 }
+._hello{
+	color: white;
+}
+._logout{
+	color: red;
+}

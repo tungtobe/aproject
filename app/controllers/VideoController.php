@@ -2,12 +2,14 @@
 
 class VideoController extends BaseController {
 
+	// caculate video existed time
     private function existTime($updated_time) {
         $now = date('Y-m-d H:i:s');
         $now = strtotime($now);
         return $now - $updated_time;
     }
 
+    // caculate video remaining time
     private function getCountDown($updated_time) {
         $date = date('Y-m-d H:i:s');
         $date = strtotime($date);
@@ -16,6 +18,7 @@ class VideoController extends BaseController {
         return $max_exist_time - $existed_time;
     }
 
+    // check video is expire
     private function isExpire($id) {
         $video = Video::find($id);
 
@@ -38,10 +41,15 @@ class VideoController extends BaseController {
     }
 
     public function showVideo($id) {
+    	$video = Video::find($id);
+    	//check video null
+    	if (is_null($video)) {
+    		return $this->layout->content = View::make('notfound');
+    	}
+
         if ($this->isExpire($id)) {
             $this->layout->content = View::make('video.expired')->with('id', $id);
-        } else {
-            $video = Video::find($id);
+        } else {            
             // get count down time
             $updated_time = strtotime($video->updated_at);
             $count_down = $this->getCountDown($updated_time);
@@ -64,32 +72,29 @@ class VideoController extends BaseController {
     public function upload() {
         $upload_dir = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']);
         $upload_url = 'videoupload/';
-        $temp_name = $_FILES['uploadedfile']['tmp_name'];  
-        $file_name = $_FILES['uploadedfile']['name']; 
+        $temp_name = $_FILES['uploadedfile']['tmp_name'];
+        $file_name = $_FILES['uploadedfile']['name'];
         $file_name1 = md5(uniqid(rand(), TRUE)) . ".mp4"; //random file name 
         $file_path = $upload_dir . $upload_url . $file_name1;
         if (move_uploaded_file($temp_name, $file_path)) {
-            // $command = "cd videoupload ; /usr/local/bin/ffmpeg -i ".$file_name." -vcodec h264 -acodec aac -strict -2 testconvert.mp4";
-            //  exec($command);
             $newvideo = new Video;
             $newvideo->title = $_POST['video_title'];
             $newvideo->status = "active";
             $newvideo->created_by = Auth::user()->id;
-            $newvideo->link = "/../".$upload_url.$file_name1;
+            $newvideo->link = "/../" . $upload_url . $file_name1;
             $newvideo->save();
             return Response::json(array(
                         'status' => "SUCCESS",
                         'link' => URL::action('VideoController@showVideo', $newvideo->id)
-                    ));
+            ));
         } else {
             return Response::json(array(
                         'status' => "FAIL",
                         'error_mess' => "Some error has occurred"
-                    ));
+            ));
         }
     }
 
-    
     public function requestReborn() {
         $video_id = $_POST['video_id'];
         $user_id = $_POST['user_id'];
@@ -105,18 +110,18 @@ class VideoController extends BaseController {
                 return Response::json(array(
                             'msg' => "SUCCESS",
                             'text' => "Success Request"
-                        ));
+                ));
             } else {
                 return Response::json(array(
                             'msg' => "FAIL",
                             'text' => "Request FAIL, plase try again"
-                        ));
+                ));
             }
         } else {
             return Response::json(array(
                         'msg' => "DUPLICATE",
                         'text' => "This video has been requested"
-                    ));
+            ));
         }
     }
 

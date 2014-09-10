@@ -1,16 +1,15 @@
 
-
+<center>
 <div class="hero-unit">
-
-<h1>video has been expired</h1>
-
-@if(Auth::check())
-	<input type="button" value="I want this video REBORN" class="btn btn-primary" id="reborn-btn">
-@else
-	<h3>{{ HTML::linkAction('AuthenController@getLogin', "Login for ask this video reborn" ) }}</h3>
-@endif
-
+	<h1>This Video has been expired</h1>
+	<br>
+	@if(Auth::check())
+		<input type="button" value="I want this video REBORN" class="_btn" id="reborn-btn">
+	@else
+		<h3>{{ HTML::linkAction('AuthenController@getLogin', "Login for ask this video reborn", null, array('class' => '_btn') ) }}</h3>
+	@endif
 </div>
+</center>
 
 
 @if(Auth::check() )

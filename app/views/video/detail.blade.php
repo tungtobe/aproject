@@ -5,20 +5,23 @@
     <h4>exist during  <span id="runner"></span> !</h4>
   </center>
 
-  <!-- share div  -->
-  <div class = "_share-fix">
-      <div data-type="button_count" class="fb-share-button" data-href="<?php echo URL::current(); ?>" data-width="600"></div><br><br>
-      <a href="<?php echo URL::current(); ?>" class="twitter-share-button" data-text="Flush Video">Tweet</a>
-  </div>
+  
+  
 
   <!-- video div -->  
   <center>
-    <video id="myVideo" controls poster="video.jpg" width="600" height="400" >
-      <source src="{{$video->link}}" type="video/mp4" />           
+    <video id="myVideo" controls width="600" height="400" >
+      <source src="{{$video->link}}" type="video/mp4" />    
+      <p>Your browser does not support the video tag.</p>       
     </video>
-  </center>      
-  <br><br>
-
+       
+    <br>
+    <!-- share div  -->
+      <h3> IF YOU LIKE, SHARE IT </h3>
+      <div data-type="button_count" class="fb-share-button" data-href="<?php echo URL::current(); ?>" data-width="600"></div>
+      <a href="<?php echo URL::current(); ?>" class="twitter-share-button" data-text="Flush Video">Tweet</a>
+    <br>
+  </center> 
   <!-- add new comment -->
   <center>
     <input name="video_id" id="video_id" type="hidden" value="{{ $video->id}}">
@@ -95,9 +98,11 @@
 
       // set video duration to 5 second
       var showtime = 5; // 5 second
-      var video = $('#myVideo');
+      var video = $('#myVideo');      
       var duration = video[0].duration;
       var backrate = duration/showtime;
+      console.log(video);
+      console.log(video[0].duration);
       video[0].playbackRate = backrate ;
   });
 
