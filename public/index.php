@@ -47,4 +47,5 @@
 */
 
 // $app->run();
-echo "test server";
+$mes = "test server";
+return $mes;
